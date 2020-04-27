@@ -6,43 +6,17 @@ const helmet = require('helmet')
 const { NODE_ENV } = require('./config')
 const app = express()
 
-//const folderRouter = require('../folders/folder-router')
+const folderRouter = require('../folders/folder-router')
 const notesRouter = require('../notes/notes-router')
-const notesService = require('../notes/notesService')
-
-app.post('/notes', (req,res,next) =>{
-
-  const knexInstance = req.app.get('db')
-
-  const {note_name, folder_id,content,modified} = req.body;
-
-  const newNote = {
-      note_name: note_name,
-      content: content,
-      folder_id: folder_id,
-      modified: modified,
-  }
-
-  notesService.postNote(knexInstance, newNote)
-    .then(note =>{
-      res.json(note)
-    })
-    .catch(next)
-
-})
-
-
-
+//const notesService = require('../notes/notesService')
 
 const morganOption = (NODE_ENV === 'production')
-
-
 //app.use(morgan(morganOption))
 app.use(helmet())
 app.use(cors())
 app.use(express.json())
-//app.use(notesRouter)
-//app.use('/folders', folderRouter)
+app.use('/notes',notesRouter)
+app.use('/folders', folderRouter)
 
 app.use(function errorHandler(error, req, res, next) {
    let response

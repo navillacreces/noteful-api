@@ -7,19 +7,20 @@ folderRouter
     .route('/')
     .post(bodyParser, (req,res, next) =>{
 
-        const {name, folder_id} = req.body;
+        const {folder_name, folder_id} = req.body;
 
         if (!folder_id){
             res.status(400).send('needs ID');
         }
-        if (!name){
+        if (!folder_name){
             res.status(400).send('need name');
         }
 
         const newFolder = {
-            name: name,
+            folder_name: foldre_name,
             folder_id: folder_id,
         };
+        
 
         folderService.insertFolder(
             req.app.get('db'), newFolder

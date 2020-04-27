@@ -6,7 +6,6 @@ const notesService = {
         return knex.select('*').from('notes');
     },
 
-    
     postNote(knex,newNote){
         return knex
             .insert(newNote)
