@@ -10,14 +10,14 @@ folderRouter
         const {folder_name, folder_id} = req.body;
 
         if (!folder_id){
-            res.status(400).send('needs ID');
+           return res.status(400).send('needs ID');
         }
         if (!folder_name){
-            res.status(400).send('need name');
+           return res.status(400).send('need name');
         }
 
         const newFolder = {
-            folder_name: foldre_name,
+            folder_name: folder_name,
             folder_id: folder_id,
         };
         
