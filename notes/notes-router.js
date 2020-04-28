@@ -40,10 +40,10 @@ notesRouter
 
         notesService.postNote(knexInstance,newNote)
             .then(note =>{
-                res.send(201).location(`https://localhost:8000/notes/${modified}`)
+                res.sendStatus(201).location(`https://localhost:8000/notes/${modified}`)
             })
             .catch(
-                res.send("NOT POSTED")
+                res.send("NOT POSTED" ) //+ JSON.stringify(error)
             )
     })
 
