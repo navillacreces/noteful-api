@@ -14,6 +14,11 @@ const notesService = {
             .then(rows =>{
                 return rows[0]
             })
+    },
+
+    deleteNote(knex,unique_id){
+        return knex('notes').where({unique_id}).delete()
+            
     }
 
 }

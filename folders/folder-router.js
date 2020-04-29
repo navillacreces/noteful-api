@@ -5,15 +5,12 @@ const bodyParser = express.json()
 
 folderRouter
     .route('/')
-    .post(bodyParser, (req,res, next) =>{
+    .post(bodyParser,(req,res) =>{
 
         const {folder_name, folder_id} = req.body;
 
-        if (!folder_id){
-           return res.status(400).send('needs ID');
-        }
-        if (!folder_name){
-           return res.status(400).send('need name');
+        if (!folder_name || !folder_id){
+            return res.status(400).send('invalid data');
         }
 
         const newFolder = {
@@ -21,17 +18,18 @@ folderRouter
             folder_id: folder_id,
         };
         
+        const knexInstance = req.app.get('db')
 
         folderService.insertFolder(
-            req.app.get('db'), newFolder
+            knexInstance, newFolder
         )
             .then(folder =>{
-                res
-                    .status(201)
-                    .location(`/folders/${folders.folder_id}`)
-                    .json(folder)
+                
+                res.location(`https://localhost:8000/folders/${folder.unique_id}`).sendStatus(201);  
             })
-            .catch(next)
+            .catch(err => {
+                res.send("not posted" + JSON.stringify(err))
+            });
 
     })
 
