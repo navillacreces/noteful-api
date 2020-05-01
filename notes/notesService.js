@@ -16,8 +16,8 @@ const notesService = {
             })
     },
 
-    deleteNote(knex,unique_id){
-        return knex('notes').where({unique_id}).delete()
+    deleteNote(knex,id){
+        return knex('notes').where({id}).delete()
             
     }
 
