@@ -9,6 +9,13 @@ const folderService = {
             .then(rows =>{
                 return rows[0]
             })
+    },
+
+    getFolders(knex){
+        return knex
+            .select('*')
+            .from('folders')
+        
     }
 
 };

@@ -16,18 +16,17 @@ notesRouter
             })
         .catch(next)
     })
-    .post(bodyParser,(req,res) =>{
+    .post(bodyParser,(req,res,next) =>{
 
-        const {note_name,note_content,folder_id,folder_name,modified} = req.body;
+        const {name,content,folder_id,modified} = req.body;
 
-        if (!note_name || !note_content || !folder_id || !modified || !folder_name){
+        if (!name || !content || !folder_id || !modified) {
             return res.status(400).send('invalid data');
         }
 
         const newNote = {
-            note_name: note_name,
-            note_content: note_content,
-            folder_name: folder_name,
+            name: name,
+            content: content,
             folder_id: folder_id,
             modified: modified
         }
@@ -37,17 +36,19 @@ notesRouter
 
         notesService.postNote(knexInstance,newNote)
             .then(note =>{
-                res.location(`https://localhost:8000/notes/${note.unique_id}`).sendStatus(201);
+                res
+                    .location(`https://localhost:8000/notes/${note.unique_id}`)
+                    .status(201)
+                    .json(note);
             })
-            .catch( err => {
-                res.send("NOT POSTED" ) //+ JSON.stringify(error)
-            });
+            .catch(next)
+            
     })
 notesRouter
-    .route('/:unique_id')
+    .route('/:id')
     .delete((req,res,next) =>{
 
-        const {unique_id} = req.params;
+        const {id} = req.params;
 
         const knexInstance = req.app.get('db')
 

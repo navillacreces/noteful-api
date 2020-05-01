@@ -2,17 +2,17 @@ BEGIN;
 
 
 INSERT INTO folders
-    (folder_name,folder_id)
+    (id,folder_name)
 VALUES
-    ('playlist1','0001');
+    ('528edbb6-fc2a-4662-97f6-9bfbc4b34201','playlist1');
 
 INSERT INTO notes
-    (note_name, note_content, folder_name, folder_id)
+    (name, content, folder_id)
 VALUES
-    ('Crystal Castles', 'Magic Spells', 'playlist1','0001'),
-    ('Bauhaus', 'Hallow Hills','playlist1','0001'),
-    ('Neon Indian', 'Hex Girlfriend','playlist1','0001'),
-    ('Drab Majesty', 'Oxytocin','playlist1','0001'),
-    ('My Chemical Romance','Vampires Will Never Hurt You','playlist1','0001');
+    ('Crystal Castles', 'Magic Spells','528edbb6-fc2a-4662-97f6-9bfbc4b34201' ),
+    ('Bauhaus', 'Hallow Hills','528edbb6-fc2a-4662-97f6-9bfbc4b34201'),
+    ('Neon Indian', 'Hex Girlfriend','528edbb6-fc2a-4662-97f6-9bfbc4b34201'),
+    ('Drab Majesty', 'Oxytocin','528edbb6-fc2a-4662-97f6-9bfbc4b34201'),
+    ('My Chemical Romance','Vampires Will Never Hurt You','528edbb6-fc2a-4662-97f6-9bfbc4b34201');
 
 COMMIT;
