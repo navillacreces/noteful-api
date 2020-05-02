@@ -31,8 +31,6 @@ notesRouter
             folder_id: folder_id,
             modified: modified
         }
-        
-        console.log(newNote)
 
         const knexInstance = req.app.get('db')
         
