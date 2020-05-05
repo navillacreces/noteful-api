@@ -10,7 +10,7 @@ const folderRouter = require('../folders/folder-router')
 const notesRouter = require('../notes/notes-router')
 //const notesService = require('../notes/notesService')
 
-const morganOption = (NODE_ENV === 'production')
+const morganOption = process.env.NODE_ENV === 'production' ? 'tiny' : 'common'
 app.use(morgan(morganOption))
 app.use(helmet())
 app.use(cors())
